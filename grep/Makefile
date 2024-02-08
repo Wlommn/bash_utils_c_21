@@ -1,0 +1,24 @@
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -std=c11
+GREP = ./s21_grep.c
+COMMON = ../common/linkedList/linkedList.c
+COMMON_OBJECTS = $(COMMON:.c=.o)
+GREP_OBJECTS = $(GREP:.c=.o)
+
+
+all: s21_grep
+	$(MAKE) clean
+	clear
+
+s21_grep: $(COMMON_OBJECTS) $(GREP_OBJECTS)
+	$(CC) $(CFLAGS) $(COMMON_OBJECTS) $(GREP_OBJECTS) -o ./s21_grep
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf ./*.o ../common/linkedList/*.o
+
+rebuild:
+	$(MAKE) clean
+	$(MAKE) all 
